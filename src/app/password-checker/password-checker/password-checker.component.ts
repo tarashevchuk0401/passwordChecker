@@ -11,10 +11,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './password-checker.component.scss'
 })
 export class PasswordCheckerComponent {
-  // passwordInput: string = ''
-
-  // reset(){
-  //   this.passwordInput = ''
-  // }
-
+  
 }
