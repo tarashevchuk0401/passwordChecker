@@ -11,5 +11,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './password-checker.component.scss'
 })
 export class PasswordCheckerComponent {
-  
+  // All logic is in CheckerDirective
 }
