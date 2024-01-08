@@ -1,9 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  HostListener,
-  Renderer2,
-} from '@angular/core';
+import {Directive, ElementRef, HostListener, Renderer2} from '@angular/core';
 
 @Directive({
   selector: '[appChecker]',
@@ -13,11 +8,13 @@ export class CheckerDirective {
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   @HostListener('input', ['$event']) onInput(event: Event): void {
-    const inputValue: string = (event.target as HTMLInputElement).value.trim();
+    const inputValue: string = (event.target as HTMLInputElement).value;
 
     const hasLetters = /[a-zA-Zа-яА-ЯіІїЇєЄ]/.test(inputValue);
     const hasDigits = /\d/.test(inputValue);
     const hasSymbols = /[^a-zA-Zа-яА-ЯіІїЇєЄ0-9]/.test(inputValue);
+    const hasSpace = /(^\s+)|(\s+$)/.test(inputValue);
+    const tooLong = inputValue.length > 50;
 
     if (hasDigits || hasLetters || hasSymbols) {
       this.setStatusColor(0, 'red');
@@ -41,11 +38,12 @@ export class CheckerDirective {
       this.setStatusColor(2, 'green');
     }
 
-    if (inputValue.length < 8) {
+    if (hasSpace || tooLong || inputValue.length < 8) {
       this.setStatusColor(0, 'red');
       this.setStatusColor(1, 'red');
       this.setStatusColor(2, 'red');
     }
+
     if (inputValue.length === 0) {
       this.setStatusColor(0, 'gray');
       this.setStatusColor(1, 'gray');

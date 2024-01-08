@@ -12,4 +12,5 @@ import { CommonModule } from '@angular/common';
 })
 export class PasswordCheckerComponent {
   // All logic is in CheckerDirective
+ 
 }
